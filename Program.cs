@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Amazon.Cloudwatch;
-using Amazon.Cloudwatch.Model;
+using Amazon.CloudWatch;
+using Amazon.CloudWatch.Model;
+using Amazon;
 
 
 namespace cwtest
@@ -20,7 +21,7 @@ namespace cwtest
 
             var metric1 = new MetricDatum
             {
-                Dimensions = new List<dimension>(),
+                Dimensions = new List<Dimension>(),
                 MetricName = "Desktop Machines Online",
                 StatisticValues = new StatisticSet(),
                 Timestamp = DateTime.Today,
@@ -30,7 +31,7 @@ namespace cwtest
 
             var metric2 = new MetricDatum
             {
-                Dimensions = new List<dimension>(),
+                Dimensions = new List<Dimension>(),
                 MetricName = "Desktop Machines Offline",
                 StatisticValues = new StatisticSet(),
                 Timestamp = DateTime.Today,
@@ -40,7 +41,7 @@ namespace cwtest
 
             var metric3 = new MetricDatum
             {
-                Dimensions = new List<dimension>(),
+                Dimensions = new List<Dimension>(),
                 MetricName = "Desktop Machines Online",
                 StatisticValues = new StatisticSet(),
                 Timestamp = DateTime.Today,
@@ -50,7 +51,7 @@ namespace cwtest
 
             var metric4 = new MetricDatum
             {
-                Dimensions = new List<dimension>(),
+                Dimensions = new List<Dimension>(),
                 MetricName = "Desktop Machines Offline",
                 StatisticValues = new StatisticSet(),
                 Timestamp = DateTime.Today,
@@ -60,12 +61,17 @@ namespace cwtest
 
             var request = new PutMetricDataRequest
             {
-                MetricData = new List<metricdatum>() { metric1, metric2,
-    metric3, metric4 },
+                MetricData = new List<MetricDatum>()
+                {
+                    metric1,
+                    metric2,
+                    metric3,
+                    metric4
+                },
                 Namespace = "Example.com Custom Metrics"
             };
 
-            client.PutMetricData(request);
+            client.PutMetricDataAsync(request).GetAwaiter().GetResult();
         }
     }
 }
