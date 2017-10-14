@@ -30,7 +30,7 @@ bld/
 #wwwroot/
 
 # Visual Studio Code
-.vscocde/
+.vscode/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
